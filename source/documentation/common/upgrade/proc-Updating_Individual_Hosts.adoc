@@ -42,18 +42,19 @@ ifdef::rhv-doc[]
 ----
 endif::[]
 ifdef::ovirt-doc[]
-* For {hypervisor-fullname}s, the `ovirt-release44` RPM package enabling the correct repositories is already installed. Ensure it is updated to the latest version:
+* If you are going to install on RHEL 8.6 Beta please follow link:/download/install_on_rhel.html[Installing on RHEL] first.
+* For {hypervisor-fullname}s, the `centos-release-ovirt45` RPM package enabling the correct repositories is already installed. Ensure it is updated to the latest version:
 +
 [source,terminal,subs="normal"]
 ----
-# dnf update -y ovirt-release44
+# dnf update -y centos-release-ovirt45
 ----
 
 * For {enterprise-linux-host-fullname}s:
 +
 [source,terminal,subs="normal"]
 ----
-# dnf install https://resources.ovirt.org/pub/yum-repo/ovirt-release44.rpm
+# dnf install -y centos-release-ovirt45
 ----
 endif::[]
 

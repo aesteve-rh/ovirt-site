@@ -9,19 +9,9 @@ page_classes: releases
 ---
 
 
-# oVirt 4.5.0 release planning
-
-The oVirt 4.5.0 code freeze is planned for April 06, 2022.
-
-If no critical issues are discovered while testing this compose it will be released on April 20, 2022.
-
-It has been planned to include in this release the content from this query:
-[Bugzilla tickets targeted to 4.5.0](https://bugzilla.redhat.com/buglist.cgi?quicksearch=ALL%20target_milestone%3A%22ovirt-4.5.0%22%20-target_milestone%3A%22ovirt-4.5.0-%22)
-
-
 # oVirt 4.5.0 Release Notes
 
-The oVirt Project is pleased to announce the availability of the 4.5.0 First Beta release as of April 06, 2022.
+The oVirt Project is pleased to announce the availability of the 4.5.0 release as of April 20, 2022.
 
 oVirt is a free open-source distributed virtualization solution,
 designed to manage your entire enterprise infrastructure.
@@ -35,10 +25,10 @@ visit our [community page](/community/).
 All issues or bugs should be reported via
 [Red Hat Bugzilla](https://bugzilla.redhat.com/enter_bug.cgi?classification=oVirt).
 
-The oVirt Project makes no guarantees as to its suitability or usefulness.
-This pre-release should not to be used in production, and it is not feature
-complete.
 
+
+If you'd like to try oVirt as quickly as possible, follow the instructions on
+the [Download](/download/) page.
 
 
 For complete installation, administration, and usage instructions, see
@@ -48,24 +38,13 @@ For a general overview of oVirt, read the [About oVirt](/community/about.html)
 page.
 
 To learn about features introduced before 4.5.0, see the
-[release notes for previous versions](/documentation/#latest-release-notes).
-
-## BETA RELEASE
-
-In order to install this Beta Release you will need to enable pre-release repository.
-
+[release notes for previous versions](/documentation/#previous-release-notes).
 
 > IMPORTANT
 > If you are going to install on RHEL 8.6 Beta please follow [Installing on RHEL](/download/install_on_rhel.html) first.
 
 ```bash
 dnf install -y centos-release-ovirt45
-```
-
-```bash
-dnf install -y python3-dnf-plugins-core
-dnf config-manager --set-enabled centos-ovirt45-testing
-dnf config-manager --set-enabled ovirt-45-upstream-testing
 ```
 
 
@@ -75,6 +54,9 @@ dnf config-manager --set-enabled ovirt-45-upstream-testing
 
 #### oVirt Engine
 
+ - [BZ 2052690](https://bugzilla.redhat.com/show_bug.cgi?id=2052690) **[RFE] Upgrade to ansible-core-2.12 in ovirt-engine**
+
+   oVirt Engine 4.5 requires ansible-core-2.12 from RHEL 8.6 and doesn't work anymore with previous ansible-2.9.z versions
  - [BZ 1940824](https://bugzilla.redhat.com/show_bug.cgi?id=1940824) **[RFE] Upgrade OVN/OVS 2.11 in oVirt to OVN/OVS 2.15**
 
    Upgrade from OvS/OVN 2.11 to OVN 2021 and OvS 2.15.
@@ -109,6 +91,9 @@ dnf config-manager --set-enabled ovirt-45-upstream-testing
  - [BZ 2023250](https://bugzilla.redhat.com/show_bug.cgi?id=2023250) **[RFE] Use virt:rhel module instead of virt:av in RHEL 8.6+ to get advanced virtualization packages**
 
    Advanced Virtualization module (virt:av) has been merged into standard RHEL virtualization module (virt:rhel) as a part of RHEL 8.6 release. Due to this change the host deploy and host upgrade flows has been updated to properly enable virt:rhel module during new installation of RHEL 8.6 host and during upgrade of existing RHEL &lt;= 8.5 to RHEL 8.6 host.
+ - [BZ 2015802](https://bugzilla.redhat.com/show_bug.cgi?id=2015802) **[RFE] oVirt hypervisors should support running on host with DISA STIG security profile applied**
+
+   oVirt Hypervisor 4.5, with exception to oVirt Node, is able to run on a host with RHEL 8.6 DISA STIG openscap profile applied.
  - [BZ 1782056](https://bugzilla.redhat.com/show_bug.cgi?id=1782056) **[RFE] Integration of built-in ipsec feature in oVirt with OVN**
 
    The IPSec for OVN feature is available on hosts with configured ovirt-provider-ovn, OVN version 2021 or higher and OvS version 2.15 or higher.
@@ -176,6 +161,9 @@ dnf config-manager --set-enabled ovirt-45-upstream-testing
  - [BZ 2010205](https://bugzilla.redhat.com/show_bug.cgi?id=2010205) **vm_kill_paused_time value should be determined from io_timeout**
 
    Vdsm configuration option vars.vm_kill_paused_time was removed. The corresponding value is directly dependent on the value of recently introduced sanlock.io_timeout option and needn't be configured separately.
+ - [BZ 2015802](https://bugzilla.redhat.com/show_bug.cgi?id=2015802) **[RFE] oVirt hypervisors should support running on host with DISA STIG security profile applied**
+
+   oVirt Hypervisor 4.5, with exception to oVirt Node, is able to run on a host with RHEL 8.6 DISA STIG openscap profile applied.
  - [BZ 1940824](https://bugzilla.redhat.com/show_bug.cgi?id=1940824) **[RFE] Upgrade OVN/OVS 2.11 in oVirt to OVN/OVS 2.15**
 
    Upgrade from OvS/OVN 2.11 to OVN 2021 and OvS 2.15.
@@ -662,6 +650,7 @@ dnf config-manager --set-enabled ovirt-45-upstream-testing
 
 #### oVirt Engine
 
+ - [BZ 2072881](https://bugzilla.redhat.com/show_bug.cgi?id=2072881) **Upgrade via backup and restore from 4.4 to 4.5 is blocked**
  - [BZ 1989121](https://bugzilla.redhat.com/show_bug.cgi?id=1989121) **[CBT][Veeam] Block backup of hosted-engine vm**
  - [BZ 2069670](https://bugzilla.redhat.com/show_bug.cgi?id=2069670) **NPE when converting ISCSI disk during the copy_data action**
  - [BZ 2070536](https://bugzilla.redhat.com/show_bug.cgi?id=2070536) **The same host CPUs are assigned twice when we run dedicated&amp;none&amp;resize VMs on the same host**
@@ -780,6 +769,7 @@ dnf config-manager --set-enabled ovirt-45-upstream-testing
 
 #### oVirt Engine
 
+ - [BZ 1868372](https://bugzilla.redhat.com/show_bug.cgi?id=1868372) **collectd-virt plugin doesn't work with latest libvirt**
  - [BZ 2070053](https://bugzilla.redhat.com/show_bug.cgi?id=2070053) **Removal of a labeled long network(more than 15 characters)  is incomplete**
  - [BZ 2032917](https://bugzilla.redhat.com/show_bug.cgi?id=2032917) **Restapi: after migrating Jackson to com.fasterxml.jackson, REST API's JSON default serializing mode is not ignoring properties with null values anymore**
  - [BZ 1700460](https://bugzilla.redhat.com/show_bug.cgi?id=1700460) **Let the user eventually skip HE global maintenance mode check on upgrades**
@@ -810,6 +800,10 @@ dnf config-manager --set-enabled ovirt-45-upstream-testing
  - [BZ 1804268](https://bugzilla.redhat.com/show_bug.cgi?id=1804268) **ovirt-engine-metrics role fails on ansible-linter**
  - [BZ 2012569](https://bugzilla.redhat.com/show_bug.cgi?id=2012569) **Update the LSR version**
  - [BZ 2025936](https://bugzilla.redhat.com/show_bug.cgi?id=2025936) **metrics configuration playbooks failing due to rhel-system-role last refactor**
+
+#### oVirt Host Dependencies
+
+ - [BZ 1868372](https://bugzilla.redhat.com/show_bug.cgi?id=1868372) **collectd-virt plugin doesn't work with latest libvirt**
 
 #### oVirt Hosted Engine HA
 
@@ -858,15 +852,16 @@ dnf config-manager --set-enabled ovirt-45-upstream-testing
 
 #### Contributors
 
-65 people contributed to this release:
+66 people contributed to this release:
 
+	Albert Esteve (Contributed to: ovirt-engine)
 	Aleš Musil (Contributed to: ovirt-appliance, ovirt-engine, ovirt-host, ovirt-openvswitch, ovirt-provider-ovn, ovirt-release, vdsm)
 	Andrej Krejcir (Contributed to: mom)
 	Arik Hadas (Contributed to: ovirt-engine)
 	Artur Socha (Contributed to: ovirt-dependencies, ovirt-dwh, ovirt-engine, ovirt-engine-keycloak, ovirt-engine-wildfly, vdsm-jsonrpc-java)
 	Asaf Rachmani (Contributed to: cockpit-ovirt, ovirt-ansible-collection, ovirt-hosted-engine-ha, ovirt-hosted-engine-setup, ovirt-node-ng-image, ovirt-setup-lib)
 	Avital Pinnick (Contributed to: ovirt-site)
-	Aviv Litman (Contributed to: ovirt-dwh, ovirt-engine, ovirt-engine-metrics)
+	Aviv Litman (Contributed to: ovirt-dwh, ovirt-engine, ovirt-engine-metrics, ovirt-host)
 	Aviv Turgeman (Contributed to: cockpit-ovirt, ovirt-release)
 	Bella Khizgiyaev (Contributed to: ovirt-engine)
 	Benny Zlotnik (Contributed to: ovirt-engine, ovirt-host, ovirt-release, vdsm)
@@ -898,7 +893,7 @@ dnf config-manager --set-enabled ovirt-45-upstream-testing
 	Martin Nečas (Contributed to: ovirt-ansible-collection, ovirt-engine, ovirt-release, python-ovirt-engine-sdk4)
 	Martin Perina (Contributed to: ovirt-ansible-collection, ovirt-dependencies, ovirt-dwh, ovirt-engine, ovirt-engine-keycloak, ovirt-engine-metrics, ovirt-engine-wildfly, ovirt-imageio, ovirt-jboss-modules-maven-plugin, ovirt-release, python-ovirt-engine-sdk4, vdsm, vdsm-jsonrpc-java)
 	Martin Tzvetanov Grigorov (Contributed to: ovirt-engine)
-	Michal Skrivanek (Contributed to: imgbased, ovirt-appliance, ovirt-dwh, ovirt-engine, ovirt-engine-metrics, ovirt-engine-ui-extensions, ovirt-hosted-engine-setup, ovirt-node-ng-image, ovirt-web-ui)
+	Michal Skrivanek (Contributed to: imgbased, ovirt-appliance, ovirt-dwh, ovirt-engine, ovirt-engine-metrics, ovirt-engine-ui-extensions, ovirt-hosted-engine-setup, ovirt-node-ng-image, ovirt-release, ovirt-web-ui)
 	Miguel Duarte Barroso (Contributed to: ovirt-release)
 	Milan Zamazal (Contributed to: ovirt-engine, vdsm)
 	Nick Sonneveld (Contributed to: ovirt-ansible-collection)
